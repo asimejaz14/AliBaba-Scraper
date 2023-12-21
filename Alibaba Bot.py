@@ -1,6 +1,5 @@
 import re
 import time
-import requests
 import sys
 from bs4 import BeautifulSoup
 from pyfiglet import Figlet
@@ -11,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from nltk import word_tokenize
 from nltk.corpus import stopwords
+from security import safe_requests
 
 f = Figlet(font='slant')
 print(f.renderText('Alibaba Bot'))
@@ -93,7 +93,7 @@ def login(username, password, driver):
 
 def extract_website(url):
     print("Sending request to:", url)
-    res = requests.get(url)
+    res = safe_requests.get(url)
     soup = BeautifulSoup(res.content, 'lxml')
     regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
 
